@@ -1,15 +1,16 @@
 from dotenv import load_dotenv
-from fetch_xkcd import fetch_comics_xkcd_metadadata
-from fetch_vk import upload_photo_to_vk_server, fetch_vk_wall_upload_server, save_vk_wall_photo
+from fetch_xkcd import fetch_comics_xkcd_metadadata, fetch_last_xkcd_comics_num
+from fetch_vk import upload_photo_to_vk_server, fetch_vk_wall_upload_server, save_vk_wall_photo, post_vk_wall
 from data_collection import download_picture
 import os
+import random
 
 
 def main():
     load_dotenv()
 
     xkcd_comic_metadata = fetch_comics_xkcd_metadadata(
-        'https://xkcd.com/info.0.json'
+        f'https://xkcd.com/{random.randint(1, fetch_last_xkcd_comics_num()+1)}/info.0.json'
     )
 
     img_url = xkcd_comic_metadata['img']
@@ -27,7 +28,9 @@ def main():
     user_id = vk_server_data['response']['user_id']
     vk_server_answer = upload_photo_to_vk_server(upload_url, file_name)
 
-    print(save_vk_wall_photo(
+    os.remove(file_name)
+
+    save_vk_wall_response = save_vk_wall_photo(
         vk_access_token,
         user_id,
         group_id,
@@ -35,7 +38,15 @@ def main():
         vk_server_answer['server'],
         vk_server_answer['hash']
         )
-    )
+
+    owner_id = f"-{group_id}"
+    from_group = 1
+    own_id = save_vk_wall_response['response'][0]['owner_id']
+    media_id = save_vk_wall_response['response'][0]['id']
+    attachments = f"photo{own_id}_{media_id}"
+    message = xkcd_comic_metadata['alt']
+
+    print(post_vk_wall(vk_access_token, owner_id, from_group, message, attachments))
 
 
 if __name__ == "__main__":

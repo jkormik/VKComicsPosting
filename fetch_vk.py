@@ -58,3 +58,21 @@ def save_vk_wall_photo(access_token, user_id, group_id, photo, server, vk_hash):
     if 'error' in response.json():
         raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
+
+
+def post_vk_wall(access_token, owner_id, from_group, message, attachments):
+    url = 'https://api.vk.com/method/wall.post'
+    payload = {
+            'owner_id': owner_id,
+            'from_group': from_group,
+            'message': message,
+            'attachments': attachments,
+            'access_token': access_token,
+            'v': '5.131'
+    }
+    response = requests.post(url, params=payload)
+    response.raise_for_status()
+    decoded_response = response.json()
+    if 'error' in response.json():
+        raise requests.exceptions.HTTPError(decoded_response["error"])
+    return decoded_response
