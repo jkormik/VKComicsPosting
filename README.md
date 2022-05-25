@@ -1,14 +1,14 @@
-# VKontakte public comix posting 
+# Comics publisher 
 
 The script is collecting random comicses from [xkcd JSON interface](https://xkcd.com/json.html) and posting them to VKontakte public.
 
 ### How to install
 
-First of all you'll need to create **apllication** (standalone type is enough), get it's *client_id*. With *client_id* of your **application** you'll be able to get **access_token**. Also you will need to get *group_id*.
+First of all you'll need to create **application** (standalone type is enough), get it's *client_id*. With *client_id* of your **application** you'll be able to get **access_token**. Also you will need to get *group_id*.
 
-You can create **apllication** [here](https://vk.com/dev).
+You can create **application** [here](https://vk.com/dev).
 
-You can get **apllication** *client_id* [here](https://vk.com/apps?act=manage).
+You can get **application** *client_id* [here](https://vk.com/apps?act=manage).
 *client_id* looks something like this `1231231`.
 
 To get **access_token** use Implicit Flow:
