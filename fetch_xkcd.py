@@ -1,7 +1,7 @@
 import requests
 
 
-def fetch_comics_xkcd_metadadata(url):
+def fetch_xkcd_comics_metadadata(url):
     response = requests.get(url)
     response.raise_for_status()
     decoded_response = response.json()

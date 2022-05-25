@@ -6,7 +6,10 @@ def fetch_vk_groups(access_token):
         'access_token': access_token,
         'v': '5.131'
     }
-    response = requests.get('https://api.vk.com/method/groups.get', params=payload)
+    response = requests.get(
+        'https://api.vk.com/method/groups.get',
+        params=payload
+    )
     response.raise_for_status()
     decoded_response = response.json()
     if 'error' in response.json():
@@ -20,7 +23,10 @@ def fetch_vk_wall_upload_server(access_token, group_id):
         'access_token': access_token,
         'v': '5.131'
     }
-    response = requests.get('https://api.vk.com/method/photos.getWallUploadServer', params=payload)
+    response = requests.get(
+        'https://api.vk.com/method/photos.getWallUploadServer',
+        params=payload
+    )
     response.raise_for_status()
     decoded_response = response.json()
     if 'error' in response.json():

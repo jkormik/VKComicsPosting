@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
-from fetch_xkcd import fetch_comics_xkcd_metadadata, fetch_last_xkcd_comics_num
-from fetch_vk import upload_photo_to_vk_server, fetch_vk_wall_upload_server, save_vk_wall_photo, post_vk_wall
+from fetch_xkcd import fetch_xkcd_comics_metadadata, fetch_last_xkcd_comics_num
+from vk_integration import upload_photo_to_vk_server, \
+    fetch_vk_wall_upload_server, save_vk_wall_photo, post_vk_wall
 from data_collection import download_picture
 import os
 import random
@@ -9,8 +10,11 @@ import random
 def main():
     load_dotenv()
 
-    xkcd_comic_metadata = fetch_comics_xkcd_metadadata(
-        f'https://xkcd.com/{random.randint(1, fetch_last_xkcd_comics_num()+1)}/info.0.json'
+    random_xkcd_comics_number = \
+        random.randint(1, fetch_last_xkcd_comics_num()+1)
+
+    xkcd_comic_metadata = fetch_xkcd_comics_metadadata(
+        f'https://xkcd.com/{random_xkcd_comics_number}/info.0.json'
     )
 
     img_url = xkcd_comic_metadata['img']
@@ -37,7 +41,7 @@ def main():
         vk_server_answer['photo'],
         vk_server_answer['server'],
         vk_server_answer['hash']
-        )
+    )
 
     owner_id = f"-{group_id}"
     from_group = 1
@@ -46,7 +50,13 @@ def main():
     attachments = f"photo{own_id}_{media_id}"
     message = xkcd_comic_metadata['alt']
 
-    print(post_vk_wall(vk_access_token, owner_id, from_group, message, attachments))
+    post_vk_wall(
+        vk_access_token,
+        owner_id,
+        from_group,
+        message,
+        attachments
+    )
 
 
 if __name__ == "__main__":
