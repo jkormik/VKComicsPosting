@@ -12,7 +12,7 @@ def fetch_vk_groups(access_token):
     )
     response.raise_for_status()
     decoded_response = response.json()
-    if 'error' in response.json():
+    if 'error' in decoded_response:
         raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
 
@@ -29,7 +29,7 @@ def fetch_vk_wall_upload_server(access_token, group_id):
     )
     response.raise_for_status()
     decoded_response = response.json()
-    if 'error' in response.json():
+    if 'error' in decoded_response:
         raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
 
@@ -42,7 +42,7 @@ def upload_photo_to_vk_server(upload_url, file_name):
         response = requests.post(upload_url, files=files)
         response.raise_for_status()
         decoded_response = response.json()
-        if 'error' in response.json():
+        if 'error' in decoded_response:
             raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
 
@@ -61,7 +61,7 @@ def save_vk_wall_photo(access_token, user_id, group_id, photo, server, vk_hash):
     response = requests.post(url, params=payload)
     response.raise_for_status()
     decoded_response = response.json()
-    if 'error' in response.json():
+    if 'error' in decoded_response:
         raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
 
@@ -79,6 +79,6 @@ def post_vk_wall(access_token, owner_id, from_group, message, attachments):
     response = requests.post(url, params=payload)
     response.raise_for_status()
     decoded_response = response.json()
-    if 'error' in response.json():
+    if 'error' in decoded_response:
         raise requests.exceptions.HTTPError(decoded_response["error"])
     return decoded_response
