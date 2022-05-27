@@ -14,7 +14,7 @@ def main():
         random.randint(1, fetch_last_xkcd_comics_num()+1)
 
     xkcd_comic_metadata = fetch_xkcd_comics_metadadata(
-        f'https://xkcd.com/{random_xkcd_comics_number}/info.0.json'
+        random_xkcd_comics_number
     )
 
     img_url = xkcd_comic_metadata['img']
