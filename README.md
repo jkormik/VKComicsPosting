@@ -23,8 +23,8 @@ You can get *group_id* [here](https://regvk.com/id/).
 Example of completed `.env` file.
 
 ```
-ACCESS_TOKEN = '12h3gjgv213k123giu1bdjb1ug1g9g9g87yur8wcn796918p28ucp1nn82mypx8y1pbyp10xmxmmxm9000xmx'
-GROUP_ID = '098765432'
+ACCESS_TOKEN='12h3gjgv213k123giu1bdjb1ug1g9g9g87yur8wcn796918p28ucp1nn82mypx8y1pbyp10xmxmmxm9000xmx'
+GROUP_ID='098765432'
 ```
 
 Python3 should be already installed.
