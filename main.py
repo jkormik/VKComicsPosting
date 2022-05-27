@@ -5,6 +5,7 @@ from vk_integration import upload_photo_to_vk_server, \
 from data_collection import download_picture
 import os
 import random
+from url_processing import get_file_name_from_url
 
 
 def main():
@@ -23,7 +24,8 @@ def main():
         img_url,
         os.getcwd()
     )
-    file_name = img_url.rsplit('/', 1)[-1]
+
+    file_name = get_file_name_from_url(img_url)
 
     vk_access_token = os.getenv('ACCESS_TOKEN')
     group_id = os.getenv('GROUP_ID')
