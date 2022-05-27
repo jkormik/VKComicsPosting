@@ -36,7 +36,7 @@ def main():
 
     os.remove(file_name)
 
-    save_vk_wall_response = save_vk_wall_photo(
+    vk_wall_upload_server_response = save_vk_wall_photo(
         vk_access_token,
         user_id,
         group_id,
@@ -47,8 +47,8 @@ def main():
 
     owner_id = f"-{group_id}"
     from_group = 1
-    own_id = save_vk_wall_response['response'][0]['owner_id']
-    media_id = save_vk_wall_response['response'][0]['id']
+    own_id = vk_wall_upload_server_response['response'][0]['owner_id']
+    media_id = vk_wall_upload_server_response['response'][0]['id']
     attachments = f"photo{own_id}_{media_id}"
     message = xkcd_comic_metadata['alt']
 
