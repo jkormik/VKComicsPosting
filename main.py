@@ -21,7 +21,7 @@ def main():
 
     download_picture(
         img_url,
-        'C:/Users/berry/Desktop/UrokiGit/VKComicsPosting'
+        os.getcwd()
     )
     file_name = img_url.rsplit('/', 1)[-1]
 
